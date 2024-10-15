@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: passkeys
+  sql:
+    init:
+      mode: always
+
+
+server:
+  servlet:
+    session:
+      persistent: false
