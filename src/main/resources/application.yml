@@ -4,7 +4,9 @@ spring:
   sql:
     init:
       mode: always
-
+  thymeleaf:
+    cache: false
+    prefix: file:src/main/resources/templates/
 
 server:
   servlet:
