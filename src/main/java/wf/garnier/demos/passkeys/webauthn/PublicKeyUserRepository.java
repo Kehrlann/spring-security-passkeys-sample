@@ -3,9 +3,9 @@ package wf.garnier.demos.passkeys.webauthn;
 import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.security.webauthn.api.Bytes;
-import org.springframework.security.webauthn.api.PublicKeyCredentialUserEntity;
-import org.springframework.security.webauthn.management.PublicKeyCredentialUserEntityRepository;
+import org.springframework.security.web.webauthn.api.Bytes;
+import org.springframework.security.web.webauthn.api.PublicKeyCredentialUserEntity;
+import org.springframework.security.web.webauthn.management.PublicKeyCredentialUserEntityRepository;
 
 public interface PublicKeyUserRepository
 		extends PublicKeyCredentialUserEntityRepository, CrudRepository<AppPublicKeyCredentialUserEntity, byte[]> {

@@ -1,5 +1,7 @@
 package wf.garnier.demos.passkeys;
 
+import java.util.List;
+
 import wf.garnier.demos.passkeys.webauthn.AppCredentialsRecordRepository;
 import wf.garnier.demos.passkeys.webauthn.PublicKeyUserRepository;
 
@@ -29,8 +31,12 @@ class PasskeysController {
 	@GetMapping("/")
 	public String index(Model model, Authentication authentication) {
 		var pkUser = publicKeyUserRepository.findByUsername(authentication.getName());
-		var passkeys = this.appCredentialsRecordRepository.findAllByUserEntityUserId(pkUser.getId().getBytes());
-		model.addAttribute("passkeys", passkeys);
+		if (pkUser != null) {
+			var passkeys = this.appCredentialsRecordRepository.findAllByUserEntityUserId(pkUser.getId().getBytes());
+			model.addAttribute("passkeys", passkeys);
+		} else {
+			model.addAttribute("passkeys", List.of());
+		}
 		return "index";
 	}
 

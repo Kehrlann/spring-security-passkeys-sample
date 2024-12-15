@@ -3,9 +3,9 @@ package wf.garnier.demos.passkeys.webauthn;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.security.webauthn.api.Bytes;
-import org.springframework.security.webauthn.api.CredentialRecord;
-import org.springframework.security.webauthn.management.UserCredentialRepository;
+import org.springframework.security.web.webauthn.api.Bytes;
+import org.springframework.security.web.webauthn.api.CredentialRecord;
+import org.springframework.security.web.webauthn.management.UserCredentialRepository;
 
 public interface AppCredentialsRecordRepository
 		extends UserCredentialRepository, CrudRepository<AppCredentialsRecord, byte[]> {

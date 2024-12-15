@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import jakarta.persistence.AttributeConverter;
 
-import org.springframework.security.webauthn.api.AuthenticatorTransport;
+import org.springframework.security.web.webauthn.api.AuthenticatorTransport;
 
 class AuthenticatorTransportConverter implements AttributeConverter<Set<AuthenticatorTransport>, String> {
 

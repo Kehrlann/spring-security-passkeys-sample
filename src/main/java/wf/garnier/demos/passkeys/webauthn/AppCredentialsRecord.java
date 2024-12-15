@@ -8,12 +8,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-import org.springframework.security.webauthn.api.AuthenticatorTransport;
-import org.springframework.security.webauthn.api.Bytes;
-import org.springframework.security.webauthn.api.CredentialRecord;
-import org.springframework.security.webauthn.api.ImmutablePublicKeyCose;
-import org.springframework.security.webauthn.api.PublicKeyCose;
-import org.springframework.security.webauthn.api.PublicKeyCredentialType;
+import org.springframework.security.web.webauthn.api.AuthenticatorTransport;
+import org.springframework.security.web.webauthn.api.Bytes;
+import org.springframework.security.web.webauthn.api.CredentialRecord;
+import org.springframework.security.web.webauthn.api.ImmutablePublicKeyCose;
+import org.springframework.security.web.webauthn.api.PublicKeyCose;
+import org.springframework.security.web.webauthn.api.PublicKeyCredentialType;
 
 @Entity
 @Table(name = "credentials_record")

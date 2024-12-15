@@ -4,8 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-import org.springframework.security.webauthn.api.Bytes;
-import org.springframework.security.webauthn.api.PublicKeyCredentialUserEntity;
+import org.springframework.security.web.webauthn.api.Bytes;
+import org.springframework.security.web.webauthn.api.PublicKeyCredentialUserEntity;
 
 @Entity
 @Table(name = "public_key_user")
