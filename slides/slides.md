@@ -131,42 +131,104 @@ Use private key to prove identity
 </div>
 
 ---
+layout: cover
+class: smaller
+---
 
-## Example: registration
+# Passkey **Registration**
 
-<br>
+---
 
 <img src="/webauthn-registration-flow-01.svg" />
 
 ---
 layout: image
-image: /webauthn-registration-1.png
+image: /passkeys-registration-01.png
 ---
 
 ---
 layout: image
-image: /webauthn-registration-2.png
+image: /passkeys-registration-02.png
 ---
 
 ---
 layout: image
-image: /webauthn-registration-3.png
+image: /passkeys-registration-03.png
 ---
 
 ---
 layout: image
-image: /webauthn-registration-4.png
+image: /passkeys-registration-04.png
 ---
 
 ---
 layout: image
-image: /webauthn-registration-5.png
+image: /passkeys-registration-05.png
 ---
 
 ---
 layout: image
-image: /webauthn-registration-6.png
+image: /passkeys-registration-06.png
 ---
+
+---
+layout: image
+image: /passkeys-registration-07.png
+---
+
+---
+layout: image
+image: /passkeys-registration-08.png
+---
+
+---
+layout: image
+image: /passkeys-registration-code.png
+---
+
+---
+layout: cover
+class: smaller
+---
+
+# Passkey **Authentication**
+
+---
+layout: image
+image: /passkeys-authentication.png
+---
+
+---
+
+# Passkeys are NOT biometric!
+
+<br>
+
+<img src="/passkeys-private-keys-1.png" style="width: 100%;"/>
+
+---
+
+# Passkeys are NOT biometric!
+
+<br>
+
+<img src="/passkeys-private-keys-2.png" style="width: 100%;"/>
+
+---
+
+# Passkeys are NOT biometric!
+
+<br>
+
+<img src="/passkeys-private-keys-3.png" style="width: 100%;"/>
+
+---
+
+# Passkeys are NOT biometric!
+
+<br>
+
+<img src="/passkeys-private-keys-4.png" style="width: 100%;"/>
 
 ---
 layout: center
