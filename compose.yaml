@@ -1,3 +1,5 @@
+name: spring-security-passkeys
+
 services:
   postgres:
     image: 'postgres:latest'
