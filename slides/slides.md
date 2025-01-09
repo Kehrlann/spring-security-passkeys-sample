@@ -41,10 +41,18 @@ Software Engineer @ Broadcom
 - <fluent-emoji-flat-envelope-with-arrow /> contact@garnier.wf
 
 ---
+
+# Passwordless apps
+
+<br>
+
+_Like it's 1998!_
+
+---
 layout: center
 ---
 
-# What is this **WebAuthN** thing?
+# What is this **passkeys** thing?
 
 ---
 class: smaller
@@ -250,11 +258,10 @@ image: /fido-attestation-structures.svg
 
 - 🤯 It's Complicated™
 - 👷 Use a library
+    - 🍃 Spring Security support!
     - (It's _still_ complicated)
-- 🤔 Define your use-case(s)
 - 📚 Read up!
-    - Yubico's site is a gold mine
-- 🍃🔐 Coming Soon™ in Spring Security
+    - 🥇 https://developers.yubico.com/
 
 ---
 
