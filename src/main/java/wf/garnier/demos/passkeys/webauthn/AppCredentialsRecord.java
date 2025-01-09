@@ -1,6 +1,7 @@
 package wf.garnier.demos.passkeys.webauthn;
 
 import java.time.Instant;
+import java.util.Collections;
 import java.util.Set;
 
 import jakarta.persistence.Convert;
@@ -11,7 +12,6 @@ import jakarta.persistence.Table;
 import org.springframework.security.web.webauthn.api.AuthenticatorTransport;
 import org.springframework.security.web.webauthn.api.Bytes;
 import org.springframework.security.web.webauthn.api.CredentialRecord;
-import org.springframework.security.web.webauthn.api.ImmutablePublicKeyCose;
 import org.springframework.security.web.webauthn.api.PublicKeyCose;
 import org.springframework.security.web.webauthn.api.PublicKeyCredentialType;
 
@@ -24,19 +24,9 @@ public class AppCredentialsRecord implements CredentialRecord {
 
 	private long signatureCount;
 
-	private boolean uvInitialized;
-
-	private boolean backupEligible;
-
-	private boolean backupState;
-
 	private byte[] userEntityUserId;
 
 	private byte[] attestationObject;
-
-	private byte[] attestationClientDataJSON;
-
-	private byte[] publicKeyCose;
 
 	private String label;
 
@@ -44,24 +34,15 @@ public class AppCredentialsRecord implements CredentialRecord {
 
 	private Instant created;
 
-	@Convert(converter = AuthenticatorTransportConverter.class)
-	private Set<AuthenticatorTransport> transports;
-
 	public static AppCredentialsRecord fromCredentialRecord(CredentialRecord record) {
 		var result = new AppCredentialsRecord();
 		result.credentialId = record.getCredentialId().getBytes();
 		result.signatureCount = record.getSignatureCount();
-		result.uvInitialized = record.isUvInitialized();
-		result.backupEligible = record.isBackupEligible();
-		result.backupState = record.isBackupState();
 		result.userEntityUserId = record.getUserEntityUserId().getBytes();
 		result.attestationObject = record.getAttestationObject().getBytes();
-		result.attestationClientDataJSON = record.getAttestationClientDataJSON().getBytes();
-		result.publicKeyCose = record.getPublicKey().getBytes();
 		result.label = record.getLabel();
 		result.lastUsed = record.getLastUsed();
 		result.created = record.getCreated();
-		result.transports = record.getTransports();
 		return result;
 	}
 
@@ -72,16 +53,12 @@ public class AppCredentialsRecord implements CredentialRecord {
 
 	@Override
 	public PublicKeyCose getPublicKey() {
-		return new ImmutablePublicKeyCose(publicKeyCose);
-	}
-
-	public void setPublicKeyCose(byte[] publicKeyCose) {
-		this.publicKeyCose = publicKeyCose;
+		return null;
 	}
 
 	@Override
 	public Set<AuthenticatorTransport> getTransports() {
-		return transports;
+		return Collections.emptySet();
 	}
 
 	@Override
@@ -104,29 +81,17 @@ public class AppCredentialsRecord implements CredentialRecord {
 
 	@Override
 	public boolean isUvInitialized() {
-		return uvInitialized;
-	}
-
-	public void setUvInitialized(boolean uvInitialized) {
-		this.uvInitialized = uvInitialized;
+		return false;
 	}
 
 	@Override
 	public boolean isBackupEligible() {
-		return backupEligible;
-	}
-
-	public void setBackupEligible(boolean backupEligible) {
-		this.backupEligible = backupEligible;
+		return false;
 	}
 
 	@Override
 	public boolean isBackupState() {
-		return backupState;
-	}
-
-	public void setBackupState(boolean backupState) {
-		this.backupState = backupState;
+		return false;
 	}
 
 	@Override
@@ -149,11 +114,7 @@ public class AppCredentialsRecord implements CredentialRecord {
 
 	@Override
 	public Bytes getAttestationClientDataJSON() {
-		return new Bytes(attestationClientDataJSON);
-	}
-
-	public void setAttestationClientDataJSON(byte[] attestationClientDataJSON) {
-		this.attestationClientDataJSON = attestationClientDataJSON;
+		return null;
 	}
 
 	@Override
