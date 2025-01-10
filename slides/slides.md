@@ -246,11 +246,14 @@ layout: center
 
 <img src="/lets-code.gif" style="height: 400px"/>
 
+---
 
----
-layout: image
-image: /spring-security-classes-tables.png
----
+## Spring Security classes
+
+<br>
+
+<img src="/spring-security-classes-tables.png" style="height: 400px; margin:auto;"/>
+
 
 ---
 layout: image
