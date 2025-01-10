@@ -249,6 +249,11 @@ layout: center
 
 ---
 layout: image
+image: /spring-security-classes-tables.png
+---
+
+---
+layout: image
 image: /fido-attestation-structures.svg
 ---
 
