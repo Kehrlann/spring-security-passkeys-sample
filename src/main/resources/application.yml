@@ -7,8 +7,3 @@ spring:
   thymeleaf:
     cache: false
     prefix: file:src/main/resources/templates/
-
-server:
-  servlet:
-    session:
-      persistent: false
