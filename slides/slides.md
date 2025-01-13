@@ -60,15 +60,15 @@ class: smaller
 
 # Glossary
 
-- 🌍 **WebAuthN**
-    - [W3C spec](https://www.w3.org/TR/webauthn-3/) -> Javascript in your browser
-- 📱 **Authenticator**
-    - _A cryptographic entity, hardware or software_ -> thing you use to authenticate
 - 🔑 **Passkey**
-    - A _discoverable_ WebAuthN authenticator
+    - A _cryptographic credential_, tied to an account on a website/app
+- 📱 **Authenticator**
+    - _A cryptographic entity, hardware or software_ : the thing you use to authenticate
 - 🐶 **FIDO2**
     - WebAuthN + CTAP
-    - FIDO alliance: Apple, Google, Microsoft
+    - FIDO alliance: Apple, Google, Microsoft, [many many more](https://fidoalliance.org/members/)
+- 🌍 **WebAuthN**
+    - [W3C spec](https://www.w3.org/TR/webauthn-3/) -> Javascript in your browser
 
 ---
 layout: two-cols-header
@@ -266,8 +266,10 @@ image: /fido-attestation-structures.svg
 
 - 🤯 It's Complicated™
 - 👷 Use a library
-    - 🍃 Spring Security support!
     - (It's _still_ complicated)
+- 🍃 Spring Security support
+    - JDBC implementations coming in 6.5 (May 2025)
+    - Contribute: https://github.com/spring-projects/spring-security
 - 📚 Read up!
     - 🥇 https://developers.yubico.com/
 
