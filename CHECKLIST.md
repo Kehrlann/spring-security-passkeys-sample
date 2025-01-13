@@ -4,7 +4,9 @@
 - [ ] docker compose down
 - [ ] Clean up passkeys: thetis, touchid, yubikey, 1password
 - [ ] App can start (port 8080 not bound)
-- [ ] Pres up
+- [ ] Presentation up
 - [ ] IntelliJ up
 - [ ] Firefox up
 - [ ] AirServer up
+- [ ] Phone: focus
+- [ ] Phone: mirror
