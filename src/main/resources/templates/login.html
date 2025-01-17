@@ -65,10 +65,20 @@
             } catch (err) {
                 throw new Error(`Authentication failed. Could not fetch authentication options: ${err.message}`, { cause: err });
             }
+
+            // FIXME: Use https://www.w3.org/TR/webauthn-3/#sctn-parseRequestOptionsFromJSON
+            const decodedAllowCredentials = !options.allowCredentials
+                ? []
+                : options.allowCredentials.map((cred) => ({
+                    ...cred,
+                    id: base64url_default.decode(cred.id),
+                }));
             const decodedOptions = {
                 ...options,
-                challenge: base64url_default.decode(options.challenge)
+                allowCredentials: decodedAllowCredentials,
+                challenge: base64url_default.decode(options.challenge),
             };
+
             const credentialOptions = {
                 publicKey: decodedOptions,
                 signal: abort_controller_default.newSignal()
