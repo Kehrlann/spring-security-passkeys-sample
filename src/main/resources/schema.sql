@@ -24,14 +24,17 @@ CREATE TABLE IF NOT EXISTS public_key_user
 CREATE TABLE IF NOT EXISTS credentials_record
 (
     -- foreign key
-    credential_id               BYTEA UNIQUE NOT NULL,
     user_entity_user_id         BYTEA        NOT NULL,
+
     -- display
     label                       TEXT         NOT NULL,
     last_used                   TIMESTAMP,
     created                     TIMESTAMP,
+
     -- contains all the authenticator data
     attestation_object          BYTEA        NOT NULL,
+    credential_id               BYTEA UNIQUE NOT NULL,
+
     -- security feature
     signature_count             INT          NOT NULL,
 
