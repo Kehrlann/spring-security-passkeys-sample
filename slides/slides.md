@@ -265,8 +265,8 @@ image: /fido-attestation-structures.svg
 # Observations
 
 - 🤯 It's Complicated™
-- 👷 Use a library
-    - (It's _still_ complicated)
+    - If possible: let your Identity Provider handle it
+- 👷 Use a library (It's _still_ complicated)
 - 🍃 Spring Security support
     - JDBC implementations coming in 6.5 (May 2025)
     - Contribute: https://github.com/spring-projects/spring-security
