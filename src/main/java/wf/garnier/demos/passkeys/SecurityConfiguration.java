@@ -6,12 +6,17 @@ import wf.garnier.demos.passkeys.mail.MailNotifier;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.ott.OneTimeTokenGenerationSuccessHandler;
 import org.springframework.security.web.authentication.ott.RedirectOneTimeTokenGenerationSuccessHandler;
+import org.springframework.security.web.webauthn.management.JdbcPublicKeyCredentialUserEntityRepository;
+import org.springframework.security.web.webauthn.management.JdbcUserCredentialRepository;
+import org.springframework.security.web.webauthn.management.PublicKeyCredentialUserEntityRepository;
+import org.springframework.security.web.webauthn.management.UserCredentialRepository;
 
 @Configuration
 class SecurityConfiguration {
@@ -48,6 +53,16 @@ class SecurityConfiguration {
 	@Bean
 	UserDetailsService userDetailsService(DataSource dataSource) {
 		return new JdbcUserDetailsManager(dataSource);
+	}
+
+	@Bean
+	UserCredentialRepository passkeyRepo(JdbcOperations jdbcOperations) {
+		return new JdbcUserCredentialRepository(jdbcOperations);
+	}
+
+	@Bean
+	PublicKeyCredentialUserEntityRepository passkeyToUserRepo(JdbcOperations jdbcOperations) {
+		return new JdbcPublicKeyCredentialUserEntityRepository(jdbcOperations);
 	}
 
 }

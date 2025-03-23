@@ -2,10 +2,9 @@ package wf.garnier.demos.passkeys;
 
 import java.util.List;
 
-import wf.garnier.demos.passkeys.webauthn.AppCredentialsRecordRepository;
-import wf.garnier.demos.passkeys.webauthn.PublicKeyUserRepository;
-
 import org.springframework.security.core.Authentication;
+import org.springframework.security.web.webauthn.management.PublicKeyCredentialUserEntityRepository;
+import org.springframework.security.web.webauthn.management.UserCredentialRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,13 +17,13 @@ class PasskeysController {
 	// register page
 	// login processsing page... ???
 
-	private final AppCredentialsRecordRepository appCredentialsRecordRepository;
+	private final UserCredentialRepository credentialsRepository;
 
-	private final PublicKeyUserRepository publicKeyUserRepository;
+	private final PublicKeyCredentialUserEntityRepository publicKeyUserRepository;
 
-	PasskeysController(AppCredentialsRecordRepository appCredentialsRecordRepository,
-			PublicKeyUserRepository publicKeyUserRepository) {
-		this.appCredentialsRecordRepository = appCredentialsRecordRepository;
+	PasskeysController(UserCredentialRepository credentialsRepository,
+			PublicKeyCredentialUserEntityRepository publicKeyUserRepository) {
+		this.credentialsRepository = credentialsRepository;
 		this.publicKeyUserRepository = publicKeyUserRepository;
 	}
 
@@ -32,9 +31,10 @@ class PasskeysController {
 	public String index(Model model, Authentication authentication) {
 		var pkUser = publicKeyUserRepository.findByUsername(authentication.getName());
 		if (pkUser != null) {
-			var passkeys = this.appCredentialsRecordRepository.findAllByUserEntityUserId(pkUser.getId().getBytes());
+			var passkeys = this.credentialsRepository.findByUserId(pkUser.getId());
 			model.addAttribute("passkeys", passkeys);
-		} else {
+		}
+		else {
 			model.addAttribute("passkeys", List.of());
 		}
 		return "index";

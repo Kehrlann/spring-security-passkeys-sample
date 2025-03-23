@@ -14,34 +14,29 @@ CREATE TABLE IF NOT EXISTS authorities
 CREATE UNIQUE INDEX IF NOT EXISTS ix_auth_username ON authorities (username, authority);
 
 -- Passkeys DDL
-CREATE TABLE IF NOT EXISTS public_key_user
+CREATE TABLE IF NOT EXISTS user_credentials
 (
-    id           BYTEA UNIQUE NOT NULL,
-    name         TEXT         NOT NULL,
-    display_name TEXT
+    credential_id                text    not null PRIMARY KEY,
+    user_entity_user_id          text    not null,
+    public_key                   bytea   not null,
+    signature_count              bigint,
+    uv_initialized               boolean,
+    backup_eligible              boolean not null,
+    authenticator_transports     text,
+    public_key_credential_type   text,
+    backup_state                 boolean not null,
+    attestation_object           bytea,
+    attestation_client_data_json bytea,
+    created                      timestamp,
+    last_used                    timestamp,
+    label                        text    not null
 );
 
-CREATE TABLE IF NOT EXISTS credentials_record
+CREATE TABLE IF NOT EXISTS user_entities
 (
-    -- foreign key
-    user_entity_user_id         BYTEA        NOT NULL,
+    id           TEXT NOT NULL PRIMARY KEY,
+    name         TEXT NOT NULL,
+    display_name TEXT,
+    CONSTRAINT fk_passkeys_users FOREIGN KEY (name) REFERENCES users (username)
 
-    -- display
-    label                       TEXT         NOT NULL,
-    last_used                   TIMESTAMP,
-    created                     TIMESTAMP,
-
-    -- contains all the authenticator data
-    attestation_object          BYTEA        NOT NULL,
-    credential_id               BYTEA UNIQUE NOT NULL,
-
-    -- security feature
-    signature_count             INT          NOT NULL,
-
-    uv_initialized              BOOLEAN,
-    backup_eligible             BOOLEAN,
-    backup_state                BOOLEAN,
-    attestation_client_datajson BYTEA        NOT NULL,
-    public_key_cose             BYTEA        NOT NULL,
-    transports                  TEXT
 );
