@@ -2,8 +2,6 @@ package wf.garnier.demos.passkeys;
 
 import javax.sql.DataSource;
 
-import wf.garnier.demos.passkeys.mail.MailNotifier;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcOperations;
@@ -25,10 +23,14 @@ class SecurityConfiguration {
 			"/login/ott");
 
 	@Bean
-	SecurityFilterChain securityFilterChain(HttpSecurity http, MailNotifier mailNotifier) throws Exception {
+	SecurityFilterChain securityFilterChain(HttpSecurity http, OneTimeTokenMailNotifier mailNotifier) throws Exception {
 		//@formatter:off
 		return http
-				.authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+				.authorizeHttpRequests(auth -> {
+					auth.requestMatchers("/error").permitAll();
+					auth.requestMatchers("/favicon.ico").permitAll();
+					auth.anyRequest().authenticated();
+				})
 				.formLogin(login -> {
 					login.loginPage("/login");
 					login.permitAll();
@@ -36,7 +38,8 @@ class SecurityConfiguration {
 				.oneTimeTokenLogin(ott -> {
 					ott.tokenGenerationSuccessHandler((request, response, authentication) -> {
 						var token = authentication.getTokenValue();System.out.println("📩 Got token: " + token);
-						mailNotifier.notify("📩 Login", "You can log in with code " + token, "http://localhost:8080/login/ott?token=" + token);
+						mailNotifier.notify(authentication.getUsername(), "Demo app log in", token);
+						System.out.println("🍪 Token: " + token);
 						ottSuccessHandler.handle(request, response, authentication);
 					});
 				})

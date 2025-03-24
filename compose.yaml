@@ -9,3 +9,13 @@ services:
       - 'POSTGRES_USER=myuser'
     ports:
       - '5432'
+
+  email:
+    image: "maildev/maildev:2.1.0"
+    ports:
+      - "1025:1025"
+      - "1080:1080"
+    healthcheck:
+      test: [ "CMD", "wget","-O", "-", "http://127.0.0.1:1080/healthz" ]
+      interval: 10s
+      timeout: 1s
