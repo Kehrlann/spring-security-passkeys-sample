@@ -41,12 +41,15 @@ Software Engineer
 - <fluent-emoji-flat-envelope-with-arrow /> contact@garnier.wf
 
 ---
+layout: image-right
+image: passwords.jpg
+---
 
-# Passwords are terrible
+# **Passwords are terrible**
 
-<br>
+&nbsp;
 
-TODO: image
+In 2025, you don't need convincing!
 
 ---
 
