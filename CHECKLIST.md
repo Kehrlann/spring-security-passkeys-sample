@@ -1,5 +1,6 @@
 # Pre-demo checklist
 
+- [ ] Display: 1920x1080p
 - [ ] VPN up
 - [ ] 1password login
 - [ ] docker compose down
@@ -10,4 +11,5 @@
 - [ ] Firefox up
 - [ ] AirServer up
 - [ ] Phone: focus
+- [ ] Phone: display turn off never
 - [ ] Phone: mirror
