@@ -19,7 +19,7 @@ canvasWidth: 1024
 
 ### Daniel Garnier-Moiroux
 
-Voxxed Ticino, 2025-01-17
+Devoxx UK, 2025-05-07
 
 
 ---
@@ -41,12 +41,34 @@ Software Engineer
 - <fluent-emoji-flat-envelope-with-arrow /> contact@garnier.wf
 
 ---
+layout: image-right
+image: passwords.jpg
+---
 
-# Passwordless apps
+# **Passwords are terrible**
+
+&nbsp;
+
+In 2025, you don't need convincing!
+
+---
+
+# One-Time Tokens
 
 <br>
 
-_Like it's 1998!_
+Implementing password-less apps ...
+
+<v-click>
+
+&nbsp;
+
+&nbsp;
+
+## _... like it's 1998!_ 🪩💃🕺
+
+
+</v-click>
 
 ---
 layout: center
@@ -281,7 +303,7 @@ image: /fido-attestation-structures.svg
 
 https://github.com/Kehrlann/spring-security-passkeys-sample
 
-<!-- https://mobile.devoxx.com/events/vdt25/rate-talk/2789 -->
+<!-- https://mobile.devoxx.com/events/devoxxuk25/rate-talk/3000 -->
 <div style="float:right; margin-right: 50px; text-align: center;">
   <img src="/qr-code.png" style="margin-bottom: -45px; margin-top: -15px;" >
 </div>
