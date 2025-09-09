@@ -27,13 +27,10 @@ class SecurityConfiguration {
 		//@formatter:off
 		return http
 				.authorizeHttpRequests(auth -> {
-					auth.requestMatchers("/error").permitAll();
+					auth.requestMatchers("/custom-login*").permitAll();
 					auth.requestMatchers("/favicon.ico").permitAll();
+					auth.requestMatchers("/error").permitAll();
 					auth.anyRequest().authenticated();
-				})
-				.formLogin(login -> {
-					login.loginPage("/login");
-					login.permitAll();
 				})
 				.oneTimeTokenLogin(ott -> {
 					ott.tokenGenerationSuccessHandler((request, response, authentication) -> {
@@ -49,6 +46,12 @@ class SecurityConfiguration {
 					passkeys.allowedOrigins("http://localhost:8080");
 				})
 				.logout(logout -> logout.logoutSuccessUrl("/login"))
+                .csrf(csrf -> {
+                    // Ignore CSRF so we do not have to deal with it in pure JS implementations.
+                    // Avoid doing this, instead following Spring Security's recommendations for CSRF:
+                    // https://docs.spring.io/spring-security/reference/servlet/exploits/csrf.html#csrf-integration-javascript
+                    csrf.ignoringRequestMatchers("/webauthn/**", "/login/webauthn");
+                })
 				.build();
 		//@formatter:on
 	}

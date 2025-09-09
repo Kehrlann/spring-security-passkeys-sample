@@ -40,9 +40,45 @@ class PasskeysController {
 		return "index";
 	}
 
-	@GetMapping("/login")
+	@GetMapping("/index-no-lib")
+	public String indexNoLib(Model model, Authentication authentication) {
+		var pkUser = publicKeyUserRepository.findByUsername(authentication.getName());
+		if (pkUser != null) {
+			var passkeys = this.credentialsRepository.findByUserId(pkUser.getId());
+			model.addAttribute("passkeys", passkeys);
+		}
+		else {
+			model.addAttribute("passkeys", List.of());
+		}
+		return "index-no-lib";
+	}
+
+	@GetMapping("/index-simple-lib")
+	public String indexSimpleLib(Model model, Authentication authentication) {
+		var pkUser = publicKeyUserRepository.findByUsername(authentication.getName());
+		if (pkUser != null) {
+			var passkeys = this.credentialsRepository.findByUserId(pkUser.getId());
+			model.addAttribute("passkeys", passkeys);
+		}
+		else {
+			model.addAttribute("passkeys", List.of());
+		}
+		return "index-simple-lib";
+	}
+
+	@GetMapping("/custom-login")
 	public String login() {
 		return "login";
+	}
+
+	@GetMapping("/custom-login-no-library")
+	public String loginNoLib() {
+		return "login-no-lib";
+	}
+
+	@GetMapping("/custom-login-library")
+	public String loginWithLib() {
+		return "login-simple-lib";
 	}
 
 }

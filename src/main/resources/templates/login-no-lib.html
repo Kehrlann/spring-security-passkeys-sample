@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Passkeys demo</title>
+
+    <script>
+        // App-specific code
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelector("#signin-passkey").addEventListener("click", async evt => {
+                if (!window.PublicKeyCredential) { /* Client not capable. Handle error. */
+                }
+
+                const optionsResponse = await fetch("/webauthn/authenticate/options",
+                    {
+                        method: "POST",
+                        headers: {
+                            "content-type": "application/json"
+                        }
+                    }).then(r => r.json());
+                console.log(optionsResponse);
+                const b64challenge = window.atob(optionsResponse.challenge.replace(/-/g, "+").replace(/_/g, "/"));
+
+                // SPEC
+                const options = {
+                    ...optionsResponse,
+                    challenge: Uint8Array.from(b64challenge, c => c.charCodeAt(0))
+                };
+                console.log(options);
+
+                try {
+                    const authenticatorData = await navigator.credentials.get({publicKey: options});
+                    const authResponse = await fetch("/login/webauthn",
+                        {
+                            method: "POST",
+                            headers: {
+                                "content-type": "application/json"
+                            },
+                            body: JSON.stringify(authenticatorData)
+                        }).then(r => r.json());
+                    window.location.href = authResponse.redirectUrl
+                } catch (err) {
+                    console.error(err);
+
+                }
+            });
+        })
+    </script>
+</head>
+
+<body>
+<h1>Log in</h1>
+<h2>Passkey</h2>
+<button id="signin-passkey">Sign in with Passkey</button>
+</body>
+</html>

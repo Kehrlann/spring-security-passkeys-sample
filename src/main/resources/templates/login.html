@@ -151,16 +151,6 @@
 
 <body>
 <h1>Log in</h1>
-<h2>Username / password</h2>
-<form action="/login" method="POST">
-    <input type="hidden" th:name="${_csrf.getParameterName()}" th:value="${_csrf.getToken()}"/>
-    <label for="username">Username</label>
-    <input type="text" name="username" id="username"/>
-    <br>
-    <label for="password">Password</label>
-    <input type="text" name="password" id="password"/>
-    <button type="submit">Log in</button>
-</form>
 <h2>Passkey</h2>
 <button id="signin-passkey">Sign in with Passkey</button>
 </body>

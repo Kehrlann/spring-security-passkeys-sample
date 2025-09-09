@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Passkeys demo</title>
+
+    <script>
+        // There is a rather big mismatch between @passwordless-id/webauthn's
+        // .register() function
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelector("#add-passkey").addEventListener("click", async evt => {
+                const passkeyLabel = document.querySelector("#passkey-label").value
+
+                if (!passkeyLabel) {
+                    console.error("must set passkey label")
+                    return;
+                }
+                try {
+                    const registerOptionsResponse = await fetch("/webauthn/register/options",
+                        {
+                            method: "POST"
+                        }).then(r => r.json())
+                    console.log(registerOptionsResponse)
+                    const userId = window.atob(registerOptionsResponse.user.id.replace(/-/g, "+").replace(/_/g, "/"))
+                    const challenge = window.atob(registerOptionsResponse.challenge.replace(/-/g, "+").replace(/_/g, "/"))
+                    const options = {
+                        ...registerOptionsResponse,
+                        excludeCredentials: [],
+                        user: {
+                            ...registerOptionsResponse.user,
+                            id: Uint8Array.from(userId, c => c.charCodeAt(0))
+                        },
+                        challenge: Uint8Array.from(challenge, c => c.charCodeAt(0))
+                    }
+                    const authenticatorData = await navigator.credentials.create({publicKey: options})
+                    console.log(authenticatorData)
+                    return
+                    const resp = await fetch("/webauthn/register",
+                        {
+                            method: "POST",
+                            headers: {
+                                "content-type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                publicKey: {
+                                    credential: authenticatorData,
+                                    label: document.querySelector("#passkey-label").value
+                                }
+                            })
+                        }).then(r => r.json())
+                    console.log(resp)
+                    console.log("success!")
+                    window.location.href = window.location.pathname + "?success"
+                    return;
+                } catch (e) {
+                    console.error("Could not register passkey")
+                    console.error(e)
+                }
+            })
+        })
+    </script>
+</head>
+
+<body>
+<h1>Passkeys demo</h1>
+<h2>Existing passkeys</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Label</th>
+        <th>Sig count</th>
+        <th>Created</th>
+        <th>Last used</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="passkey :${passkeys}">
+        <td th:text="${passkey.getLabel()}"></td>
+        <td th:text="${passkey.getSignatureCount()}"></td>
+        <td th:text="${#dates.format(passkey.getCreated(), 'yyyy-MM-dd hh:mm')}"></td>
+        <td th:text="${#dates.format(passkey.getLastUsed(), 'yyyy-MM-dd hh:mm')}"></td>
+        <td>
+            <button data-role="delete" th:data-id="${passkey.getCredentialId().toBase64UrlString()}">del</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h2>Add new passkey</h2>
+<label for="passkey-label">Label: </label>
+<input type="text" name="passkey-label" id="passkey-label"/>
+<button id="add-passkey">Add</button>
+<h2>Sign out</h2>
+<form action="/logout" method="POST">
+    <input type="hidden" th:name="${_csrf.getParameterName()}" th:value="${_csrf.getToken()}"/>
+    <button type="submit">Log Out</button>
+</form>
+</body>
+</html>
