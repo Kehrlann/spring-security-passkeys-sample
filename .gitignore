@@ -38,3 +38,4 @@ out/
 
 ### Slides ###
 node_modules/
+*.pdf
