@@ -41,11 +41,6 @@ class SecurityConfiguration {
 						ottSuccessHandler.handle(request, response, authentication);
 					});
 				})
-				.webAuthn(passkeys -> {
-					passkeys.rpName("Spring Security Relying Party");
-					passkeys.rpId("localhost");
-					passkeys.allowedOrigins("http://localhost:8080");
-				})
 				.logout(logout -> logout.logoutSuccessUrl("/login"))
                 .csrf(csrf -> {
                     // Ignore CSRF so we do not have to deal with it in pure JS implementations.
