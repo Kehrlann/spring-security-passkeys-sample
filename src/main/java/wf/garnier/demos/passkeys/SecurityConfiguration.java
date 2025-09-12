@@ -11,6 +11,7 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.ott.OneTimeTokenGenerationSuccessHandler;
 import org.springframework.security.web.authentication.ott.RedirectOneTimeTokenGenerationSuccessHandler;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.webauthn.management.JdbcPublicKeyCredentialUserEntityRepository;
 import org.springframework.security.web.webauthn.management.JdbcUserCredentialRepository;
 import org.springframework.security.web.webauthn.management.PublicKeyCredentialUserEntityRepository;
@@ -51,6 +52,11 @@ class SecurityConfiguration {
                     // Avoid doing this, instead following Spring Security's recommendations for CSRF:
                     // https://docs.spring.io/spring-security/reference/servlet/exploits/csrf.html#csrf-integration-javascript
                     csrf.ignoringRequestMatchers("/webauthn/**", "/login/webauthn");
+                    // Instead you should be doing this:
+                    var repo = new CookieCsrfTokenRepository();
+                    repo.setCookieCustomizer(c -> c.httpOnly(false));
+                    csrf.csrfTokenRepository(repo);
+                    csrf.csrfTokenRequestHandler(new SpaCsrfTokenRequestHandler());
                 })
 				.build();
 		//@formatter:on
