@@ -19,26 +19,25 @@ class SecurityConfiguration {
 
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http, OneTimeTokenMailNotifier mailNotifier) throws Exception {
-		//@formatter:off
-		return http
-				.authorizeHttpRequests(auth -> {
-					auth.requestMatchers("/custom-login*").permitAll();
-					auth.requestMatchers("/favicon.ico").permitAll();
-					auth.requestMatchers("/error").permitAll();
-					auth.anyRequest().authenticated();
-				})
-                .oneTimeTokenLogin(ott -> {
-                    ott.tokenGenerationSuccessHandler((request, response, authentication) -> {
-                        var token = authentication.getTokenValue();
-                        var email = authentication.getUsername();
-                        mailNotifier.notify(email, "Demo app log in", token);
-                        System.out.println("📩 Got token: " + token);
-                        DEFAULT_OTT_HANDLER.handle(request, response, authentication);
-                    });
-                })
-				.logout(logout -> logout.logoutSuccessUrl("/login"))
-				.build();
-		//@formatter:on
+		return http.authorizeHttpRequests(auth -> {
+			auth.requestMatchers("/custom-login*").permitAll();
+			auth.requestMatchers("/favicon.ico").permitAll();
+			auth.requestMatchers("/error").permitAll();
+			auth.anyRequest().authenticated();
+		}).oneTimeTokenLogin(ott -> {
+			ott.tokenGenerationSuccessHandler((request, response, authentication) -> {
+				var token = authentication.getTokenValue();
+				var email = authentication.getUsername();
+				mailNotifier.notify(email, "Demo app log in", token);
+				System.out.println("📩 Got token: " + token);
+				DEFAULT_OTT_HANDLER.handle(request, response, authentication);
+			});
+		})
+			.logout(logout -> logout.logoutSuccessUrl("/login"))
+			// This is a terrible idea. Don't do this.
+			// It does make the demo faster, though.
+			.csrf(csrf -> csrf.ignoringRequestMatchers("/webauthn/**", "/login/webauthn"))
+			.build();
 	}
 
 	@Bean
