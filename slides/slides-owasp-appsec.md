@@ -79,11 +79,11 @@ class: smaller
     - A _cryptographic credential_, tied to an account on a website/app
 - 📱 **Authenticator**
     - _A cryptographic entity, hardware or software_ : the thing you use to authenticate
+- 🌍 **WebAuthN**
+    - [W3C spec](https://www.w3.org/TR/webauthn-3/) -> Javascript in your browser
 - 🐶 **FIDO2**
     - WebAuthN + CTAP
     - FIDO alliance: Apple, Google, Microsoft, [many many more](https://fidoalliance.org/members/)
-- 🌍 **WebAuthN**
-    - [W3C spec](https://www.w3.org/TR/webauthn-3/) -> Javascript in your browser
 
 ---
 layout: two-cols-header
@@ -283,7 +283,6 @@ image: /fido-attestation-structures.svg
     - If possible: let your Identity Provider handle it
 - 👷 Use a library (It's _still_ complicated)
 - 🍃 Spring Security support
-    - JDBC implementations coming in 6.5 (May 2025)
     - Contribute: https://github.com/spring-projects/spring-security
 - 📚 Read up!
     - 🥇 https://developers.yubico.com/
@@ -296,9 +295,11 @@ image: /fido-attestation-structures.svg
 
 https://github.com/Kehrlann/spring-security-passkeys-sample
 
-<!-- https://mobile.devoxx.com/events/vdt25/rate-talk/2789 -->
+<!-- qrencode -s9 -m 2 -o slides/public/qr-code-owasp.png https://openfeedback.io/owasp-appsec-days-fr-2025/2025-09-23/HZ57rOFYg4v4CKJ24GaP  -->
 <div style="float:right; margin-right: 50px; text-align: center;">
-  <img src="/qr-code.png" style="margin-bottom: -45px; margin-top: -15px;" >
+  <a href="https://openfeedback.io/owasp-appsec-days-fr-2025/2025-09-23/HZ57rOFYg4v4CKJ24GaP" target="_blank">
+      <img src="/qr-code-owasp.png" style="margin-bottom: -45px; margin-top: -15px;" >
+  </a>
 </div>
 
 <br>
