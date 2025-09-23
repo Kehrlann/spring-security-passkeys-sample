@@ -181,9 +181,11 @@ layout: center
 
 https://github.com/Kehrlann/spring-security-passkeys-sample
 
-<!-- https://mobile.devoxx.com/events/vdt25/rate-talk/2789 -->
+<!-- qrencode -s9 -m 2 -o slides/public/qr-code-paris-web.png https://openfeedback.io/mATeVNzPiyOWyDiT8VdN/null/pPJEYwl4Mnn1IgzyRnVj  -->
 <div style="float:right; margin-right: 50px; text-align: center;">
-  <img src="/qr-code.png" style="margin-bottom: -45px; margin-top: -15px;" >
+  <a href="https://openfeedback.io/mATeVNzPiyOWyDiT8VdN/null/pPJEYwl4Mnn1IgzyRnVj" target="_blank">
+      <img src="/qr-code-paris-web.png" style="margin-bottom: -45px; margin-top: -15px;" >
+  </a>
 </div>
 
 <br>
