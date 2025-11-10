@@ -13,7 +13,7 @@ java {
 	}
 }
 ext {
-	extra["spring-security.version"] = "7.0.0-RC2"
+	extra["spring-security.version"] = "7.0.0-RC3"
 }
 
 repositories {

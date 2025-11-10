@@ -47,7 +47,6 @@ class SecurityConfiguration {
 					});
 				})
 				.webAuthn(passkeys -> {
-					passkeys.rpName("Spring Security Relying Party");
 					passkeys.rpId("localhost");
 					passkeys.allowedOrigins("http://localhost:8080");
 				})
