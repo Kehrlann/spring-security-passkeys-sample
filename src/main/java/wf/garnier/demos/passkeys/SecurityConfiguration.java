@@ -5,7 +5,7 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcOperations;
-import org.springframework.security.config.annotation.authorization.EnableGlobalMultiFactorAuthentication;
+import org.springframework.security.config.annotation.authorization.EnableMultiFactorAuthentication;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.authority.FactorGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,8 +20,9 @@ import org.springframework.security.web.webauthn.management.PublicKeyCredentialU
 import org.springframework.security.web.webauthn.management.UserCredentialRepository;
 
 @Configuration
-@EnableGlobalMultiFactorAuthentication(
-		authorities = { FactorGrantedAuthority.OTT_AUTHORITY, FactorGrantedAuthority.WEBAUTHN_AUTHORITY })
+// Only enable if there is already a passkey registered
+//@EnableMultiFactorAuthentication(
+//		authorities = { FactorGrantedAuthority.OTT_AUTHORITY, FactorGrantedAuthority.WEBAUTHN_AUTHORITY })
 class SecurityConfiguration {
 
 	OneTimeTokenGenerationSuccessHandler ottSuccessHandler = new RedirectOneTimeTokenGenerationSuccessHandler(
